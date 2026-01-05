@@ -20,12 +20,11 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Build & test on iOS Simulator (CI-safe, no signing)"
+  desc "CI build & test on iOS Simulator"
   lane :ci do
     scan(
       project: "TCA_POC.xcodeproj",
       scheme: "TCA_POC",
-      device: "iPhone 17 Pro",
       clean: true,
       skip_build: false,
       build_for_testing: true
