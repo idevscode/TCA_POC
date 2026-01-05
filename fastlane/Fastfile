@@ -25,7 +25,7 @@ platform :ios do
     scan(
       project: "TCA_POC.xcodeproj",
       scheme: "TCA_POC",
-      device: "iPhone 15",
+      device: "iPhone 17 Pro",
       clean: true,
       skip_build: false,
       build_for_testing: true
