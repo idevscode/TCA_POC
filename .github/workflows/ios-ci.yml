@@ -25,11 +25,18 @@ jobs:
 
       - name: Build for iOS Simulator
         run: |
+        
+          DEVICE=$(xcrun simctl list devices available \
+            | grep -m 1 "iPhone" \
+            | sed -E 's/.*\(([-A-F0-9]+)\).*/\1/')
+
+          echo "Using simulator: $DEVICE"
+          
           xcodebuild \
             -project TCA_POC.xcodeproj \
             -scheme TCA_POC \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.0' \
+            -destination "id=$DEVICE" \
             -configuration Debug \
             clean build
 
