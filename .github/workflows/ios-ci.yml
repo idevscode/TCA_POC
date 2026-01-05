@@ -31,6 +31,7 @@ jobs:
             -scheme TCA_POC \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
+            ENABLE_SWIFT_MACROS=YES \
             -configuration Debug \
             clean build
 
