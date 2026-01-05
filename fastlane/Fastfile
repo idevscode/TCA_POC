@@ -25,10 +25,11 @@ platform :ios do
     scan(
       project: "TCA_POC.xcodeproj",
       scheme: "TCA_POC",
+      destination: "platform=iOS Simulator",
       clean: true,
-      skip_build: false,
       build_for_testing: true
     )
+
   end
 end
 
