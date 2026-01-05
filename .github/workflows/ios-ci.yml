@@ -28,4 +28,10 @@ jobs:
 
       - name: Run Fastlane CI
         run: bundle exec fastlane ci
+        
+      - name: Run Fastlane CI
+        env:
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 60
+          FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 8
+        run: bundle exec fastlane ci
 
