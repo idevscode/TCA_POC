@@ -25,15 +25,11 @@ struct LoginReducer: Reducer {
         var errorMessage: String? = nil
         
         var isEmailValid: Bool {
-                    let pattern = #"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"#
-            return NSPredicate(format: "SELF MATCHES %@", pattern)
-                        .evaluate(with: email)
-            
+            Validator.isEmailValid(email: email)
         }
         
         var isPasswordValid: Bool {
             password.count >= 6
-            
         }
         
         var emailValidationMessage : String? {
