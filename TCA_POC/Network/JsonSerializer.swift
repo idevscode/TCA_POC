@@ -11,13 +11,12 @@ public struct BaseResponse<T: Codable> : Codable {
     var result: T?
 }
 
-protocol JSONEncoderDecoder{
+protocol JSONEncoderDecoder: Sendable{
     
     func serialize<T: Codable>(data: Data) throws -> T where T : Decodable, T : Encodable
-    
 }
 
-class JsonSerializer: JSONEncoderDecoder{
+final class JsonSerializer: JSONEncoderDecoder, Sendable{
     let decoder = JSONDecoder()
     
     func serialize<T>(data: Data) throws -> T where T : Decodable, T : Encodable {
@@ -28,7 +27,4 @@ class JsonSerializer: JSONEncoderDecoder{
             return decodedResponse
         }
     }
-    
-    
-    
 }

@@ -17,6 +17,10 @@ import ComposableArchitecture
 struct LoginReducer: Reducer {
     
     @Dependency(\.authDataProvider) var authDataProvider
+    @AppStorage(AppStorageKeys.isLoggedIn) var isLoggedIn = false
+    
+    
+    
     
     struct State: Equatable {
         var email: String = ""
@@ -78,6 +82,9 @@ struct LoginReducer: Reducer {
                 do {
                     let loginRequest = LoginRequest(email: email, password: password)
                     let success = try await authDataProvider.login(request: loginRequest)
+                    defer{
+                        self.isLoggedIn = true
+                    }
                     await send(.loginResponse(.success(success)))
                 } catch {
                     await send(.loginResponse(.failure(.invalidCredentials)))

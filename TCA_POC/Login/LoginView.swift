@@ -13,8 +13,25 @@ struct LoginView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
+                    LoginFormView(store: store) // delegate to a form subview
+        }
+    }
+}
+
+struct LoginFormView: View {
+    let store: StoreOf<LoginReducer>
+    @StateObject private var viewStore: ViewStore<LoginReducer.State, LoginReducer.Action>
+
+    init(store: StoreOf<LoginReducer>) {
+            self.store = store
+            // Create a ViewStore using publisher
+            self._viewStore = StateObject(
+                wrappedValue: ViewStore(store, observe: { $0 })
+            )
+    }
+    
+    var body: some View {
             VStack(alignment: .leading, spacing: 0) {
-                
                 
                 AppTextField(
                     title: "Email",
@@ -27,8 +44,6 @@ struct LoginView: View {
                     keyBoard: .emailAddress,
                     isSecure: false
                 )
-                
-                    
                 Spacer().frame(height: 20)
                 AppTextField(
                     title: "Password",
@@ -43,7 +58,9 @@ struct LoginView: View {
                 )
                 Spacer().frame(height: 20)
                 Button {
+                    
                     viewStore.send(.loginButtonTapped)
+                        
                 } label: {
                     if viewStore.isLoading {
                         ProgressView()
@@ -58,7 +75,7 @@ struct LoginView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding()
-        }
+        
     }
 }
 

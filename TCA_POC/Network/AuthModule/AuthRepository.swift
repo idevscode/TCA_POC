@@ -13,10 +13,10 @@ protocol AuthRepository: AnyObject{
 
 }
 
-class AuthDataProvider: AuthRepository {
+actor AuthDataProvider: AuthRepository,  Sendable {
     
-    var networkCLient: NetworkProvider
-    var jsonDecoder: JSONEncoderDecoder
+    let networkCLient: NetworkProvider
+    let jsonDecoder: JSONEncoderDecoder
     
     init(networkCLient: NetworkProvider, jsonDecoder: JSONEncoderDecoder) {
         self.networkCLient = NetworkExecutor()
@@ -44,5 +44,4 @@ extension DependencyValues {
         get { self[AuthDataProvider.self] }
         set { self[AuthDataProvider.self] = newValue }
     }
-    
 }

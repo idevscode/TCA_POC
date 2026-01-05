@@ -7,4 +7,6 @@
 
 struct Constants{
     static let baseUrl = "https://reqres.in"
+    static let dummyJson = "https://dummyjson.com"
+    static let jsonplaceholder = "https://jsonplaceholder.typicode.com/"
 }

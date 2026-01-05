@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LoginRequest : RequestProtocol{
+final class LoginRequest : RequestProtocol{
     
     
     let email: String
@@ -26,7 +26,7 @@ class LoginRequest : RequestProtocol{
         "/api/login"
     }
     
-    var headers: [String : String] {
+    var header: [String : String] {
         [
             "x-api-key": "reqres-free-v1",
             "Content-Type": "application/json",

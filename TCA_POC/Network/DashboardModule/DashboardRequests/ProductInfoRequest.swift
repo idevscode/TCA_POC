@@ -8,40 +8,43 @@
 import Foundation
 
 
-class ProductRequest : RequestProtocol{
+final class ProductRequest : RequestProtocol{
     
+    let pageNo: String
     
-    let productId: String
+    init(pageNo: String) {
+        self.pageNo = pageNo
+    }
     
     
     var baseUrl: String {
-        Constants.baseUrl
+        Constants.dummyJson
     }
     
     var path: String {
-        "/api/login"
+        "/products"
     }
     
-    var headers: [String : String] {
+    var header: [String : String] {
         [
-            "x-api-key": "reqres-free-v1",
-            "Content-Type": "application/json",
+//                    "User-Agent": "MyApp/1.0 (iOS)",  // ✅ Add this
+                    "Accept": "application/json",      // ✅ Add this
         ]
+    }
+    
+    var parameters: [String : Any]? {
+        ["limit": "10", "skip": pageNo]
+        
     }
     
     var queryItems: [URLQueryItem]? {
         nil
+//        [URLQueryItem(name: "page", value: String(pageNo))]
     }
     
     var method: HTTPMethod {
-        HTTPMethod.post
+        HTTPMethod.get
     }
     
-    var parameters: [String : Any]?{
-        [
-            "email": email,
-            "password": password
-        ]
-    }
     
 }
